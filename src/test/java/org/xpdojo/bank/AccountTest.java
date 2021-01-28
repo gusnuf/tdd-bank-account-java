@@ -51,4 +51,37 @@ public class AccountTest {
         boolean retValue = account.withdraw(200);
         assertThat(retValue).isEqualTo(false);
     }
+
+    @Test
+    public void transferExactBalance() {
+        Account source = new Account();
+        Account target = new Account();
+        source.deposit(100);
+        boolean retValue = source.transfer(100, target);
+        assertThat(retValue).isTrue();
+        assertThat(source.balance()).isEqualTo(0);
+        assertThat(target.balance()).isEqualTo(100);
+    }
+
+    @Test
+    public void transferSafeBalance() {
+        Account source = new Account();
+        Account target = new Account();
+        source.deposit(100);
+        boolean retValue = source.transfer(100, target);
+        assertThat(retValue).isTrue();
+        assertThat(source.balance()).isEqualTo(0);
+        assertThat(target.balance()).isEqualTo(100);
+    }
+
+    @Test
+    public void transferOverage() {
+        Account source = new Account();
+        Account target = new Account();
+        source.deposit(100);
+        boolean retValue = source.transfer(200, target);
+        assertThat(retValue).isFalse();
+        assertThat(source.balance()).isEqualTo(100);
+        assertThat(target.balance()).isEqualTo(0);
+    }
 }

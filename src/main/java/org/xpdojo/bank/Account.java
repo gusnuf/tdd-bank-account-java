@@ -20,4 +20,13 @@ public class Account {
     public int balance() {
         return current_balance;
     }
+
+    public boolean transfer(int amount, Account target) {
+        boolean can_withdraw = this.withdraw(amount);
+        if (!can_withdraw) {
+            return false;
+        }
+        target.deposit(amount);
+        return true;
+    }
 }
