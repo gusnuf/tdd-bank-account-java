@@ -27,4 +27,28 @@ public class AccountTest {
         account.deposit(200);
         assertThat(account.balance()).isEqualTo(300);
     }
+
+    @Test
+    public void withdrawExactBalance() {
+        Account account = new Account();
+        account.deposit(100);
+        boolean retValue = account.withdraw(100);
+        assertThat(retValue).isEqualTo(true);
+    }
+
+    @Test
+    public void withdrawSafeAmount() {
+        Account account = new Account();
+        account.deposit(100);
+        boolean retValue = account.withdraw(100);
+        assertThat(retValue).isEqualTo(true);
+    }
+
+    @Test
+    public void withdrawOverage() {
+        Account account = new Account();
+        account.deposit(100);
+        boolean retValue = account.withdraw(200);
+        assertThat(retValue).isEqualTo(false);
+    }
 }
